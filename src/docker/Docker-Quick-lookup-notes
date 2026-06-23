@@ -1,0 +1,46 @@
+Docker Interview Notes
+This summary covers the fundamental problems Docker solves for Java developers and basic operational commands.
+
+1. The Problem: "It Works on My Machine"
+The Pain Point: Sharing a .jar file between team members often fails due to environment mismatches—different Java versions, missing dependencies, or incompatible operating systems.
+Java's Limitation: While "Write Once, Run Anywhere" is a core concept, it still requires a pre-installed, compatible JRE/JDK on the target machine.
+
+2. The Solution: Docker
+Docker Concept: Instead of sharing just the .jar, you package the application, the specific Java version, and all necessary dependencies into a single Docker Image.
+
+Image vs. Container:
+Image: A read-only blueprint (package) of your application.
+Container: A running instance of an image. It is an isolated, executable environment.
+
+3. Essential Docker Concepts & Commands
+docker run: Fetches the image from Docker Hub and starts a container.
+docker ps: Lists currently running containers.
+docker ps -a: Lists all containers (including exited/stopped ones).
+docker images: Lists all images downloaded locally.
+
+Tags:
+Tags define specific versions (e.g., 25-alpine).
+The latest tag refers to the most recent version pushed to the repository.
+
+Interactive Mode (-it): Used to start a container and keep the terminal attached to it, allowing you to interact directly with the environment (e.g., accessing JShell inside a Java container).
+Automatic Exit: If a container has no long-running process (like a web server) and you aren't in interactive mode, the container terminates immediately after executing its default command.
+
+The Critical Difference:
+VMs: Require a Hypervisor and a full-fledged Guest OS (including its own kernel). This is heavy-weight and slow to boot.
+
+Containers: Utilize a shared host kernel and only package the User Space (libraries, binaries). This makes them lightweight, fast, and highly efficient.
+
+4. Practical Implementation
+Dockerfile: The "recipe" for your image. Know key instructions:
+
+FROM: Sets the base image (e.g., OpenJDK)
+COPY: Moves your JAR into the container.
+ENTRYPOINT: The command that executes your app upon startup.
+Port Mapping (-p): Essential for exposing internal container services to the host machine.
+
+5. Essential CLI Skills
+Be prepared to explain or demonstrate these commands:
+docker run -it: Starts a container in interactive mode.
+docker ps / docker ps -a: Lists running vs. all containers.
+docker stop / docker rm: Lifecycle management for containers.
+docker system prune: Cleaning up unused resources.
