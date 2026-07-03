@@ -1,0 +1,15 @@
+Single Responsibility Principle states that a class should have only one reason to change.
+The focus is not on the number of methods but on the responsibility the class represents. For example, a CreditApprovalService should only contain logic related to credit evaluation and approval.
+ If email notification, auditing, logging, or other unrelated concerns are added to the same class, the class now changes for multiple reasons, violating SRP.
+ In Spring applications, business services should also remain independent of web concerns such as ResponseEntity, which should be handled at the controller layer. Cross-cutting concerns like auditing and logging are typically implemented using AOP or dedicated components to keep responsibilities separated.
+
+
+class CreditApprovalService {
+
+    public CreditScore calculateScore() {}
+
+    public boolean isEligible(Customer customer) {}
+
+    public ApprovalResult approve(Customer customer) {}
+}
+
